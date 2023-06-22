@@ -1,10 +1,23 @@
-﻿namespace Task5.Calculator
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.Linq;
+using Task5.Calculator.Interfaces;
+
+namespace Task5.Calculator
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            var services = new ServiceCollection().RegisterServices().BuildServiceProvider();
+            IMenu menu = services.GetRequiredService<IMenu>();
+
+            menu.PrintMenu();
+            menu.StartCalculating(menu.GetAnswer());
+
+            Console.WriteLine();
         }
     }
 }
