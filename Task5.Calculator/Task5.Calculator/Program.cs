@@ -17,7 +17,7 @@ namespace Task5.Calculator
             menu.PrintMenu();
             menu.StartCalculating(menu.GetAnswer());
 
-            Console.WriteLine();
+            Console.ReadLine();
         }
     }
 }
