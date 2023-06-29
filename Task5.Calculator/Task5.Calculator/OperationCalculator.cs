@@ -28,11 +28,11 @@ namespace Task5.Calculator
                     result = leftOperand * rightOperand;
                     break;
                 case Operators.Division:
-                    result = Math.Round(leftOperand / rightOperand, 3);
+                    result = leftOperand / rightOperand;
                     break;
             }
 
-            return result;
+            return Math.Round(result, 4);
         }
     }
 }

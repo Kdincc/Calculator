@@ -10,7 +10,7 @@ namespace Task5.Calculator
     {
         public string ParseFirstPriorityOperation(string expression, IFormatProvider formatProvider)
         {
-            const string BRACKET_PATTERN = @"\((.*?)\)";
+            const string BRACKET_PATTERN = @"\(+-?\d+(\.\d+)?([-+*/]\d+(\.\d+)?)*\)(([-+*/]\d+(\.\d+)?)([-+*/]\d+(\.\d+)?)*\))*";
             Regex regex = new Regex(BRACKET_PATTERN);
             Match match = regex.Match(expression);
 

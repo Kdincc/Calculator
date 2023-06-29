@@ -13,7 +13,7 @@ namespace Task5.Calculator
 
         public Operation(double leftOperand, Operators _operator, double rightOperand)
         {
-            LeftOperand = Math.CopySign(leftOperand, leftOperand);
+            LeftOperand = leftOperand;
             Operator = _operator;
             RightOperand = rightOperand;
         }

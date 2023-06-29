@@ -8,7 +8,7 @@ using Task5.Calculator.Interfaces;
 
 namespace Task5.Calculator
 {
-    public class ExpressionChecker: IExpressionChecker
+    public class ExpressionChecker : IExpressionChecker
     {
         public bool IsContainsZeroDivide(string divideOperation)
         {
@@ -38,15 +38,12 @@ namespace Task5.Calculator
 
         public bool IsCorrectFileExpression(string expression)
         {
-            const string PATTERN = @"^(-?\d+(\.\d+)?|-?\(-?\d+(\.\d+)?[*/+-]\d+(\.\d+)?\))([*/+-]((-?\d+(\.\d+)?)|(\(-?\d+(\.\d+)?[*/+-]\d+(\.\d+)?\))))*$";
+            const string PATTERN = @"^-?(\d+(\.\d+)?|\(+-?\d+(\.\d+)?)([-+*/]\d+(\.\d+)?\)?([-+*/]\(+-?\d+(\.\d+)?)*)*$";
             Regex regex = new Regex(PATTERN);
+            int leftBracketCount = expression.Where(x => x == (char)Operators.LeftBracket).Count();
+            int rightBracketCount = expression.Where(x => x == (char)Operators.RightBracket).Count();
 
-            if (regex.IsMatch(expression))
-            {
-                return true;
-            }
-
-            return false;
+            return (leftBracketCount == rightBracketCount) && regex.IsMatch(expression);
         }
     }
 }

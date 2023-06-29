@@ -50,6 +50,8 @@ namespace Task5.Calculator.UnitTests
         [DataRow("3.4+0.2*0.2", true)]
         [DataRow("2+z-3", false)]
         [DataRow("(2+3)-4", true)]
+        [DataRow("-2+3-4*2/1)*2)-3+12+((-4+2)*3)-2*2-3*2-4+2*((3-2)*0-2+3", false)]
+        [DataRow("-2+3-4*2/1*2-3+12+((-4+2)*3)-2*2-3*2-4+2*((3-2)*0-2)+3", true)]
         public void IsCorrectFileExpression(string expression, bool expected)
         {
             //arrange

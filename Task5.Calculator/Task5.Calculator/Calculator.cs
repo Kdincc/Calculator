@@ -61,9 +61,9 @@ namespace Task5.Calculator
                     if (_exampleChecker.IsCorrectFileExpression(expression))
                     {
                         var processedExample = _processor.ProcessFirstPriorityOperations(expression, numberFormatInfo);
-                        
+
                         processedExample = _processor.ProcessSecondPriorityOperations(processedExample, numberFormatInfo);
-                        
+
                         result = _processor.ProcessThirdPriorityOperations(processedExample, numberFormatInfo);
                     }
 

@@ -22,25 +22,26 @@ namespace Task5.Calculator
 
         public string ProcessFirstPriorityOperations(string expression, IFormatProvider formatProvider)
         {
-            StringBuilder stringBuilder = new StringBuilder(expression);
             string bracketExpression = _parser.ParseFirstPriorityOperation(expression, formatProvider);
-            string processedBracketExpression = bracketExpression;
+            string processedBracketExpression;
+            char[] brackets = new char[] { (char)Operators.LeftBracket, (char)Operators.RightBracket };
 
             if (string.IsNullOrEmpty(bracketExpression)) 
             {
                 return expression;
             }
 
-            if (CheckOperators(bracketExpression, Operators.Division, Operators.Multiplication)) 
+            var openedBracketExpression = ProcessBracketExpression(bracketExpression, formatProvider);
+            processedBracketExpression = openedBracketExpression;
+
+            if (CheckOperators(openedBracketExpression, Operators.Division, Operators.Multiplication)) 
             {
-                processedBracketExpression = ProcessSecondPriorityOperations(bracketExpression, formatProvider);
+                processedBracketExpression = ProcessSecondPriorityOperations(openedBracketExpression, formatProvider);
             }
 
             processedBracketExpression = ProcessThirdPriorityOperations(processedBracketExpression, formatProvider);
 
-            stringBuilder.Replace(bracketExpression, processedBracketExpression.Trim (new char[] { (char)Operators.LeftBracket, (char)Operators.RightBracket }));
-
-            string processedExample = stringBuilder.ToString();
+            string processedExample = expression.ReplaceFirstOccurrence(openedBracketExpression, processedBracketExpression.Trim(brackets));
 
             if (CheckOperators(processedExample, Operators.LeftBracket, Operators.RightBracket))
             { 
@@ -93,19 +94,26 @@ namespace Task5.Calculator
             return processedExample;
         }
 
+        private string ProcessBracketExpression(string bracketExpression, IFormatProvider formatProvider) 
+        {
+            var openedBracketExpression = _parser.ParseFirstPriorityOperation(bracketExpression, formatProvider);
+            var trimedBracketExpression = openedBracketExpression.RemoveFirstAndLastOccurrence((char)Operators.LeftBracket, (char)Operators.RightBracket);
+
+            if (CheckOperators(trimedBracketExpression, Operators.LeftBracket, Operators.RightBracket))
+            {
+                return ProcessBracketExpression(trimedBracketExpression, formatProvider);
+            }
+
+            return openedBracketExpression;
+        }
         private string ProcessOperation(Operation operation, string expression, IFormatProvider formatProvider)
         {
-            StringBuilder stringBuilder = new StringBuilder(expression);
             double result;
             string strOperation = operation.ToString();
-            int index = expression.IndexOf(strOperation);
 
             result = _operationCalculator.CalculateOperation(operation);
 
-            stringBuilder.Remove(index, strOperation.Length);
-            stringBuilder.Insert(index, result.ToString(formatProvider));
-
-            return stringBuilder.ToString();
+            return expression.ReplaceFirstOccurrence(strOperation, result.ToString(formatProvider));
         }
 
         private bool CheckOperators(string processedExpression, Operators firstOperator, Operators secondOperator)
@@ -127,5 +135,6 @@ namespace Task5.Calculator
 
             return false;
         }
+
     }
 }
