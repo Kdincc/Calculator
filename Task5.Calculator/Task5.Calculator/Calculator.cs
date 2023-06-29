@@ -48,7 +48,7 @@ namespace Task5.Calculator
 
         public void CalculateFromFile(string path)
         {
-            const string OUTPUT_PATH = @"\Task5\Task5.Calculator\Output.txt";
+            string OUTPUT_PATH = Path.Combine(Directory.GetCurrentDirectory(), "output.txt");
             string result;
 
             using (StreamReader streamReader = new StreamReader(path))
