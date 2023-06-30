@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.IO;
 using Task5.Calculator.Interfaces;
 
@@ -42,7 +43,7 @@ namespace Task5.Calculator
 
         public void CalculateFromFile(string path)
         {
-            string outputPath = Path.Combine(Directory.GetDirectoryRoot(path), "output.txt");
+            string outputPath = Path.Combine(Directory.GetCurrentDirectory(), "output.txt");
             string result;
 
             using (StreamReader streamReader = new StreamReader(path))

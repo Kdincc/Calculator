@@ -42,7 +42,7 @@ namespace Task5.Calculator.UnitTests
             //arrange
             string[] actual;
             string testInputPath = @"\Task5\Task5.Calculator\Task5.Calculator.UnitTests\InputFileToTest.txt";
-            string outputPath = @"\Task5\Task5.Calculator\Output.txt";
+            string outputPath = Path.Combine(Directory.GetCurrentDirectory(), "output.txt");
 
             //act
             File.WriteAllLines(testInputPath, expressions);
