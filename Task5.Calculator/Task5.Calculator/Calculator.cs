@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Task5.Calculator.Interfaces;
 
 namespace Task5.Calculator
@@ -16,8 +10,8 @@ namespace Task5.Calculator
         private readonly ICalculateProcessor _processor;
         private readonly ICalculatingResultsWriter _calculatingResultsWriter;
         private readonly IExpressionChecker _exampleChecker;
-        
-        public Calculator(ICalculateProcessor parser, ICalculatingResultsWriter calculatingResultsWriter, IExpressionChecker exampleChecker) 
+
+        public Calculator(ICalculateProcessor parser, ICalculatingResultsWriter calculatingResultsWriter, IExpressionChecker exampleChecker)
         {
             _processor = parser;
             _calculatingResultsWriter = calculatingResultsWriter;

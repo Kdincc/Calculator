@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Task5.Calculator.Interfaces;
 
 namespace Task5.Calculator
@@ -15,7 +11,7 @@ namespace Task5.Calculator
             const string PATTERN = @"\d+(\.\d+)?\/0";
             Regex regex = new Regex(PATTERN);
 
-            if (regex.IsMatch(divideOperation)) 
+            if (regex.IsMatch(divideOperation))
             {
                 return true;
             }

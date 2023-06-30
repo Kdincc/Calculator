@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Globalization;
-using System.Linq;
 using System.Text.RegularExpressions;
 using Task5.Calculator.Interfaces;
 
@@ -31,7 +29,7 @@ namespace Task5.Calculator
             return ParseOperation(formatProvider, PATTERN, expression);
         }
 
-        private Operation ParseOperation (IFormatProvider formatProvider, string pattern, string expression) 
+        private Operation ParseOperation(IFormatProvider formatProvider, string pattern, string expression)
         {
             Regex regex = new Regex(pattern);
             Match match = regex.Match(expression);
@@ -47,7 +45,7 @@ namespace Task5.Calculator
                 {
                     leftOperand = Convert.ToDouble(match.Groups[1].Value, formatProvider);
                 }
-                
+
                 Operators _operator = (Operators)char.Parse(match.Groups[3].Value);
                 double rightOperand = Convert.ToDouble(match.Groups[4].Value, formatProvider);
 

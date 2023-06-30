@@ -1,5 +1,4 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 
 namespace Task5.Calculator
 {
@@ -20,7 +19,7 @@ namespace Task5.Calculator
 
         public override string ToString()
         {
-            if (Operator == Operators.None) 
+            if (Operator == Operators.None)
             {
                 return Operator.ToString();
             }

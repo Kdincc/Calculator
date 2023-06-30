@@ -1,9 +1,6 @@
-﻿using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿using System;
+using System.Linq;
 using Task5.Calculator.Interfaces;
-using System;
-using System.Globalization;
 
 namespace Task5.Calculator
 {
@@ -26,7 +23,7 @@ namespace Task5.Calculator
             string processedBracketExpression;
             char[] brackets = new char[] { (char)Operators.LeftBracket, (char)Operators.RightBracket };
 
-            if (string.IsNullOrEmpty(bracketExpression)) 
+            if (string.IsNullOrEmpty(bracketExpression))
             {
                 return expression;
             }
@@ -34,7 +31,7 @@ namespace Task5.Calculator
             var openedBracketExpression = ProcessBracketExpression(bracketExpression, formatProvider);
             processedBracketExpression = openedBracketExpression;
 
-            if (CheckOperators(openedBracketExpression, Operators.Division, Operators.Multiplication)) 
+            if (CheckOperators(openedBracketExpression, Operators.Division, Operators.Multiplication))
             {
                 processedBracketExpression = ProcessSecondPriorityOperations(openedBracketExpression, formatProvider);
             }
@@ -44,7 +41,7 @@ namespace Task5.Calculator
             string processedExample = expression.ReplaceFirstOccurrence(openedBracketExpression, processedBracketExpression.Trim(brackets));
 
             if (CheckOperators(processedExample, Operators.LeftBracket, Operators.RightBracket))
-            { 
+            {
                 return ProcessFirstPriorityOperations(processedExample, formatProvider);
             }
 
@@ -60,7 +57,7 @@ namespace Task5.Calculator
                 return expression;
             }
 
-            if (_expressionChecker.IsContainsZeroDivide(operation.ToString())) 
+            if (_expressionChecker.IsContainsZeroDivide(operation.ToString()))
             {
                 return "Divide by zero! " + operation.ToString();
             }
@@ -94,7 +91,7 @@ namespace Task5.Calculator
             return processedExample;
         }
 
-        private string ProcessBracketExpression(string bracketExpression, IFormatProvider formatProvider) 
+        private string ProcessBracketExpression(string bracketExpression, IFormatProvider formatProvider)
         {
             var openedBracketExpression = _parser.ParseFirstPriorityOperation(bracketExpression, formatProvider);
             var trimedBracketExpression = openedBracketExpression.RemoveFirstAndLastOccurrence((char)Operators.LeftBracket, (char)Operators.RightBracket);
@@ -128,7 +125,7 @@ namespace Task5.Calculator
 
         private bool IsEmptyOperation(Operation operation)
         {
-            if (operation.Operator == Operators.None) 
+            if (operation.Operator == Operators.None)
             {
                 return true;
             }

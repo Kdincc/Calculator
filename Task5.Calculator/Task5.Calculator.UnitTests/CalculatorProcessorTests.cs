@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Globalization;
 
 namespace Task5.Calculator.UnitTests
 {
@@ -17,7 +11,7 @@ namespace Task5.Calculator.UnitTests
         private readonly CalculatorParser calculatorParser = new CalculatorParser();
         private readonly CalculatorProcessor calculatorProcessor;
 
-        public CalculatorProcessorTests() 
+        public CalculatorProcessorTests()
         {
             calculatorProcessor = new CalculatorProcessor(calculatorParser, exampleChecker, operationCalculator);
         }

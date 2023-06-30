@@ -1,5 +1,3 @@
-using System.Globalization;
-
 namespace Task5.Calculator.UnitTests
 {
     [TestClass]
@@ -12,7 +10,7 @@ namespace Task5.Calculator.UnitTests
         private readonly CalculatorProcessor calculatorProcessor;
         private readonly Calculator calculator;
 
-        public CalculatorTests() 
+        public CalculatorTests()
         {
             calculatorProcessor = new CalculatorProcessor(calculatorParser, exampleChecker, operationCalculator);
             calculator = new Calculator(calculatorProcessor, calculatingResultsWriter, exampleChecker);
@@ -38,7 +36,7 @@ namespace Task5.Calculator.UnitTests
         }
 
         [TestMethod]
-        [DataRow( new string[] { "(12+3)+2*3-4/2*3", "4+6*3*3", "8+4-10-20" }, new string[] { "(12+3)+2*3-4/2*3 = 15", "4+6*3*3 = 58", "8+4-10-20 = -18" })]
+        [DataRow(new string[] { "(12+3)+2*3-4/2*3", "4+6*3*3", "8+4-10-20" }, new string[] { "(12+3)+2*3-4/2*3 = 15", "4+6*3*3 = 58", "8+4-10-20 = -18" })]
         public void CalculateFromFile(string[] expressions, string[] expected)
         {
             //arrange

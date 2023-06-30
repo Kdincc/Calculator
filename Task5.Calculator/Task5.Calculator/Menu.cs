@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Task5.Calculator.Interfaces;
 
 namespace Task5.Calculator
@@ -13,7 +8,7 @@ namespace Task5.Calculator
         private readonly IInputChecker _inputChecker;
         private readonly ICalculator _calculator;
         private readonly IUserInterface _userInterface;
-        public Menu(IInputChecker inputChecker, ICalculator calculator, IUserInterface userInterface) 
+        public Menu(IInputChecker inputChecker, ICalculator calculator, IUserInterface userInterface)
         {
             _inputChecker = inputChecker;
             _calculator = calculator;
@@ -52,7 +47,7 @@ namespace Task5.Calculator
                 return;
             }
 
-            if (answer == 2) 
+            if (answer == 2)
             {
                 Console.Write("Input file path with math expressions to calculate: ");
                 var path = _userInterface.InputFilePath();

@@ -1,8 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using System.Linq;
 using Task5.Calculator.Interfaces;
 
 namespace Task5.Calculator
