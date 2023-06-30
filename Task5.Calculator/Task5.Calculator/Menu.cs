@@ -60,7 +60,7 @@ namespace Task5.Calculator
                 if (_inputChecker.IsFilePathExists(path))
                 {
                     _calculator.CalculateFromFile(path);
-                    Console.WriteLine("Check the ouput file in program directory for answers");
+                    Console.WriteLine("Check the ouput file in input file directory for answers");
                     return;
                 }
             }
