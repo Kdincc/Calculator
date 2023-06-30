@@ -48,7 +48,7 @@ namespace Task5.Calculator
 
         public void CalculateFromFile(string path)
         {
-            string outputPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "output.txt");
+            string outputPath = Path.Combine(Directory.GetDirectoryRoot(path), "output.txt");
             string result;
 
             using (StreamReader streamReader = new StreamReader(path))
