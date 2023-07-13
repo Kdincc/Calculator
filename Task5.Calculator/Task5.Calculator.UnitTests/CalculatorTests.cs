@@ -37,16 +37,20 @@ namespace Task5.Calculator.UnitTests
         {
             //arrange
             string[] actual;
-            string testInputPath = @"\Task5\Task5.Calculator\Task5.Calculator.UnitTests\InputFileToTest.txt";
-            string outputPath = Path.Combine(Directory.GetCurrentDirectory(), "output.txt");
+            string outputPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "output.txt");
+            string path = "FileToTest.txt";
 
             //act
-            File.WriteAllLines(testInputPath, expressions);
-            calculator.CalculateFromFile(testInputPath);
+            File.WriteAllLines(path, expressions);
+            calculator.CalculateFromFile(path);
             actual = File.ReadAllLines(outputPath);
 
             //assert
             CollectionAssert.AreEqual(expected, actual);
+
+            //Cleanup
+            File.Delete(outputPath);
+            File.Delete(path);
         }
     }
 
