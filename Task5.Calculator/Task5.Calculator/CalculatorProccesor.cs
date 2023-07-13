@@ -23,7 +23,6 @@ namespace Task5.Calculator
 
         public double ProcessMathExpression(string expression)
         {
-
             StringBuilder number = new StringBuilder();
             bool isPreviousSymbolOperator = false;
 
@@ -125,7 +124,7 @@ namespace Task5.Calculator
             }
         }
 
-        private static double PerformOperation(double leftOperand, char operation, double rightOperand)
+        public static double PerformOperation(double leftOperand, char operation, double rightOperand)
         {
             double result = 0;
 
@@ -139,7 +138,7 @@ namespace Task5.Calculator
             };
         }
 
-        private bool IsOperator(char ch)
+        public bool IsOperator(char ch)
         {
             if (priority.ContainsKey(ch))
             {

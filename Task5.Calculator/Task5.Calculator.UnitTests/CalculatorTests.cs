@@ -11,6 +11,7 @@ namespace Task5.Calculator.UnitTests
     public class CalculatorTests
     {
         private readonly Calculator calculator = new Calculator(new CalculatorProccesor(), new ExpressionChecker());
+        private readonly CalculatingResultsWriter resultsWriter = new CalculatingResultsWriter();
 
         [TestMethod]
         [DataRow("2+3-4-0+8", 9)]
@@ -41,8 +42,10 @@ namespace Task5.Calculator.UnitTests
             string path = "FileToTest.txt";
 
             //act
+            calculator.Subscribe(resultsWriter);
             File.WriteAllLines(path, expressions);
             calculator.CalculateFromFile(path);
+            resultsWriter.WriteResultsToFile(outputPath);
             actual = File.ReadAllLines(outputPath);
 
             //assert
