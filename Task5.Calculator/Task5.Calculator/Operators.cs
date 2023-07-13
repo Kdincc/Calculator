@@ -8,6 +8,7 @@
         Division = '/',
         LeftBracket = '(',
         RightBracket = ')',
+        UnaryMinus = '~',
         None = '\0'
     }
 }

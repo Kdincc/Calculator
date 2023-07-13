@@ -5,25 +5,11 @@ namespace Task5.Calculator
 {
     public class UserInterface : IUserInterface
     {
-        public string ChooseMenuVariant()
+        public string Input()
         {
             string input = Console.ReadLine();
 
             return input;
-        }
-
-        public string InputExpression()
-        {
-            string expression = Console.ReadLine();
-
-            return expression;
-        }
-
-        public string InputFilePath()
-        {
-            string path = Console.ReadLine();
-
-            return path;
         }
     }
 }

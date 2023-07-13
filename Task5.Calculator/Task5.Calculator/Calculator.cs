@@ -1,73 +1,89 @@
 ﻿using System;
-using System.Globalization;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Task5.Calculator.Interfaces;
 
 namespace Task5.Calculator
 {
     public class Calculator : ICalculator
     {
-        private readonly NumberFormatInfo numberFormatInfo = NumberFormatInfo.InvariantInfo;
-        private readonly ICalculateProcessor _processor;
-        private readonly ICalculatingResultsWriter _calculatingResultsWriter;
-        private readonly IExpressionChecker _exampleChecker;
-
-        public Calculator(ICalculateProcessor parser, ICalculatingResultsWriter calculatingResultsWriter, IExpressionChecker exampleChecker)
+        private readonly List<IObserver<string>> observers= new List<IObserver<string>>();
+        private readonly IExpressionChecker _checker;
+        private readonly ICalculateProcessor _calculateProcessor;
+        public Calculator(ICalculateProcessor calculateProcessor, IExpressionChecker checker )
         {
-            _processor = parser;
-            _calculatingResultsWriter = calculatingResultsWriter;
-            _exampleChecker = exampleChecker;
+            _checker = checker;
+            _calculateProcessor = calculateProcessor;
         }
 
-        public string CalculateFromConsole(string expression)
+        public double CalculateFromConsole(string expression)
         {
-            string result;
+            double result = 0;
 
-            if (!_exampleChecker.IsCorrectConsoleExpression(expression))
+            if (_checker.IsCorrectConsoleExpression(expression)) 
             {
-                return "Incorrect expression!";
+                result =  _calculateProcessor.ProcessMathExpression(expression);
+
+                NotifyObservers($"{expression} = {result}");
+
+                return result;
             }
 
-            var processedExpression = _processor.ProcessSecondPriorityOperations(expression, numberFormatInfo);
-
-            if (_exampleChecker.IsContainsZeroDivide(processedExpression))
-            {
-                return processedExpression;
-            }
-
-            result = _processor.ProcessThirdPriorityOperations(processedExpression, numberFormatInfo);
-
+            NotifyObservers(expression + " = " + "Incorrect expression!");
 
             return result;
         }
 
         public void CalculateFromFile(string path)
         {
-            string outputPath = Path.Combine(Directory.GetCurrentDirectory(), "output.txt");
-            string result;
-
-            using (StreamReader streamReader = new StreamReader(path))
+            using(var streamReader = new StreamReader(path)) 
             {
-                while (!streamReader.EndOfStream)
+                while(!streamReader.EndOfStream) 
                 {
                     var expression = streamReader.ReadLine();
-                    result = "Incorrect expression!";
 
-                    if (_exampleChecker.IsCorrectFileExpression(expression))
+                    if (_checker.IsCorrectFileExpression(expression)) 
                     {
-                        var processedExample = _processor.ProcessFirstPriorityOperations(expression, numberFormatInfo);
-
-                        processedExample = _processor.ProcessSecondPriorityOperations(processedExample, numberFormatInfo);
-
-                        result = _processor.ProcessThirdPriorityOperations(processedExample, numberFormatInfo);
+                        var result = _calculateProcessor.ProcessMathExpression(expression);
+                        NotifyObservers($"{expression} = {result}");
                     }
-
-                    _calculatingResultsWriter.AddResult(expression, result);
+                    else
+                    {
+                        NotifyObservers($"{expression} = Incorrect expression!");
+                    }
                 }
-            };
+            }
 
-            _calculatingResultsWriter.WriteResults(outputPath);
+            NotifyAboutCompleteObservers();
         }
 
+        public IDisposable Subscribe(IObserver<string> observer)
+        {
+            if (!observers.Contains(observer))
+            {
+                observers.Add(observer);
+            }
+
+            return new Unsubscriber<string>(observers, observer);
+        }
+
+        private void NotifyObservers(string message)
+        {
+            foreach (var observer in observers)
+            {
+                observer.OnNext(message);
+            }
+        }
+
+        private void NotifyAboutCompleteObservers()
+        {
+            foreach (var observer in observers) 
+            {
+                observer.OnCompleted();    
+            }
+        }
     }
 }

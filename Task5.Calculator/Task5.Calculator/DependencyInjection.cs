@@ -7,15 +7,12 @@ namespace Task5.Calculator
     {
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
-            services.AddTransient<IMenu, Menu>();
             services.AddTransient<ICalculatingResultsWriter, CalculatingResultsWriter>();
-            services.AddTransient<IOperationCalculator, OperationCalculator>();
             services.AddTransient<IExpressionChecker, ExpressionChecker>();
-            services.AddTransient<ICalculatorParser, CalculatorParser>();
-            services.AddTransient<ICalculateProcessor, CalculatorProcessor>();
-            services.AddTransient<ICalculator, Calculator>();
             services.AddTransient<IUserInterface, UserInterface>();
             services.AddTransient<IInputChecker, InputChecker>();
+            services.AddTransient<ICalculator, Calculator>();
+            services.AddTransient<ICalculateProcessor, CalculatorProccesor>();
 
             return services;
         }

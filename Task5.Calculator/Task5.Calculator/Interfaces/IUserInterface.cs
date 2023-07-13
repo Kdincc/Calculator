@@ -2,10 +2,6 @@
 {
     public interface IUserInterface
     {
-        string ChooseMenuVariant();
-
-        string InputExpression();
-
-        string InputFilePath();
+        string Input();
     }
 }

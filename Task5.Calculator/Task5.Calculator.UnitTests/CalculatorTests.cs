@@ -1,32 +1,28 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Task5.Calculator.Interfaces;
+
 namespace Task5.Calculator.UnitTests
 {
     [TestClass]
     public class CalculatorTests
     {
-        private readonly CalculatingResultsWriter calculatingResultsWriter = new CalculatingResultsWriter();
-        private readonly ExpressionChecker exampleChecker = new ExpressionChecker();
-        private readonly OperationCalculator operationCalculator = new OperationCalculator();
-        private readonly CalculatorParser calculatorParser = new CalculatorParser();
-        private readonly CalculatorProcessor calculatorProcessor;
-        private readonly Calculator calculator;
-
-        public CalculatorTests()
-        {
-            calculatorProcessor = new CalculatorProcessor(calculatorParser, exampleChecker, operationCalculator);
-            calculator = new Calculator(calculatorProcessor, calculatingResultsWriter, exampleChecker);
-        }
+        private readonly Calculator calculator = new Calculator(new CalculatorProccesor(), new ExpressionChecker());
 
         [TestMethod]
-        [DataRow("2+3-4-0+8", "9")]
-        [DataRow("8*3/3*2*2", "32")]
-        [DataRow("12+3*2*3-4/2*3", "24")]
-        [DataRow("43-3*2*0*2*3", "43")]
-        [DataRow("2+3/0", "Divide by zero! 3/0")]
-        [DataRow("2+3+z", "Incorrect expression!")]
-        public void CalculateFromConsole_CorrectAnswer(string example, string expected)
+        [DataRow("2+3-4-0+8", 9)]
+        [DataRow("8*3/3*2*2", 32)]
+        [DataRow("12+3*2*3-4/2*3", 24)]
+        [DataRow("43-3*2*0*2*3", 43)]
+        [DataRow("2+3/0", double.PositiveInfinity)]
+        [DataRow("2+3+z", 0)]
+        public void CalculateFromConsole_CorrectAnswer(string example, double expected)
         {
             //arrange
-            string actual;
+            double actual;
 
             //act
             actual = calculator.CalculateFromConsole(example);
@@ -53,4 +49,6 @@ namespace Task5.Calculator.UnitTests
             CollectionAssert.AreEqual(expected, actual);
         }
     }
+
 }
+

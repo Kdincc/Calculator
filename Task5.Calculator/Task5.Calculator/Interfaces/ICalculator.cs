@@ -1,8 +1,10 @@
-﻿namespace Task5.Calculator.Interfaces
+﻿using System;
+
+namespace Task5.Calculator.Interfaces
 {
-    public interface ICalculator
+    public interface ICalculator : IObservable<string>
     {
-        string CalculateFromConsole(string expression);
+        double CalculateFromConsole(string expression);
 
         void CalculateFromFile(string path);
     }

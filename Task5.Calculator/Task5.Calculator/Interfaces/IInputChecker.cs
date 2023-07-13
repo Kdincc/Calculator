@@ -2,8 +2,6 @@
 {
     public interface IInputChecker
     {
-        bool IsCorrectMenuAnswer(string answer);
-
         bool IsFilePathExists(string path);
     }
 }

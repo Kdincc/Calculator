@@ -1,8 +1,10 @@
-﻿namespace Task5.Calculator.Interfaces
+﻿using System;
+
+namespace Task5.Calculator.Interfaces
 {
-    public interface ICalculatingResultsWriter
+    public interface ICalculatingResultsWriter : IObserver<string>
     {
-        void AddResult(string expression, string result);
-        void WriteResults(string path);
+        void WriteResultsToFile(string path);
+        void WriteResultsToConsole();
     }
 }

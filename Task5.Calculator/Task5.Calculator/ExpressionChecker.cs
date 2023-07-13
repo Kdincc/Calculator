@@ -6,19 +6,6 @@ namespace Task5.Calculator
 {
     public class ExpressionChecker : IExpressionChecker
     {
-        public bool IsContainsZeroDivide(string divideOperation)
-        {
-            const string PATTERN = @"\d+(\.\d+)?\/0";
-            Regex regex = new Regex(PATTERN);
-
-            if (regex.IsMatch(divideOperation))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
         public bool IsCorrectConsoleExpression(string expression)
         {
             const string PATTERN = @"^-?\d+(\.\d+)?([/+*-]-?\d+(\.\d+)?)*$";

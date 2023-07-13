@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Task5.Calculator.Interfaces;
 
 namespace Task5.Calculator
@@ -8,12 +10,27 @@ namespace Task5.Calculator
     {
         private readonly List<string> results = new List<string>();
 
-        public void AddResult(string expression, string result)
+        public void OnCompleted()
         {
-            results.Add(expression + " = " + result);
+            Console.WriteLine("Calculating is over !");
         }
 
-        public void WriteResults(string path)
+        public void OnError(Exception error)
+        {
+            Console.WriteLine(error.ToString());
+        }
+
+        public void OnNext(string value)
+        {
+            results.Add(value);
+        }
+
+        public void WriteResultsToConsole()
+        {
+            Console.WriteLine(results.FirstOrDefault());
+        }
+
+        public void WriteResultsToFile(string path)
         {
             File.WriteAllLines(path, results);
         }
