@@ -15,8 +15,6 @@ namespace Task5.Calculator
             IInputChecker inputChecker = services.GetRequiredService<IInputChecker>();
             CalculatorAdapter calculator= services.GetRequiredService<CalculatorAdapter>();
 
-            string outputPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "output.txt");
-
             Console.WriteLine("Hello this program can calculate math expressions in 2 mods");
             Console.WriteLine("If you want console mod, input math expression (without brackets) or if you want file mode input file path");
 

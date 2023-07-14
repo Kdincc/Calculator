@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace Task5.Calculator
     {
         private readonly ICalculator _calculator;
         private readonly ICalculatingResultsWriter _calculatingResultsWriter;
+        private readonly string outputPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "output.txt");
 
         public CalculatorAdapter(ICalculator calculator, ICalculatingResultsWriter calculatingResultsWriter)
         {
@@ -34,7 +36,7 @@ namespace Task5.Calculator
 
             _calculator.CalculateFromFile(path);
 
-            _calculatingResultsWriter.WriteResultsToConsole();
+            _calculatingResultsWriter.WriteResultsToFile(outputPath);
         }
 
         public IDisposable Subscribe(IObserver<string> observer)
