@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Task5.Calculator.Interfaces;
 
 namespace Task5.Calculator
 {
     public class Calculator : ICalculator
     {
-        private readonly List<IObserver<string>> observers= new List<IObserver<string>>();
+        private readonly List<IObserver<string>> observers = new List<IObserver<string>>();
         private readonly IExpressionChecker _checker;
         private readonly ICalculateProcessor _calculateProcessor;
-        public Calculator(ICalculateProcessor calculateProcessor, IExpressionChecker checker )
+        public Calculator(ICalculateProcessor calculateProcessor, IExpressionChecker checker)
         {
             _checker = checker;
             _calculateProcessor = calculateProcessor;
@@ -23,9 +20,9 @@ namespace Task5.Calculator
         {
             double result = 0;
 
-            if (_checker.IsCorrectConsoleExpression(expression)) 
+            if (_checker.IsCorrectConsoleExpression(expression))
             {
-                result =  _calculateProcessor.ProcessMathExpression(expression);
+                result = _calculateProcessor.ProcessMathExpression(expression);
 
                 NotifyObservers($"{expression} = {result}");
 
@@ -39,13 +36,13 @@ namespace Task5.Calculator
 
         public void CalculateFromFile(string path)
         {
-            using(var streamReader = new StreamReader(path)) 
+            using (var streamReader = new StreamReader(path))
             {
-                while(!streamReader.EndOfStream) 
+                while (!streamReader.EndOfStream)
                 {
                     var expression = streamReader.ReadLine();
 
-                    if (_checker.IsCorrectFileExpression(expression)) 
+                    if (_checker.IsCorrectFileExpression(expression))
                     {
                         var result = _calculateProcessor.ProcessMathExpression(expression);
                         NotifyObservers($"{expression} = {result}");
@@ -80,9 +77,9 @@ namespace Task5.Calculator
 
         private void NotifyAboutCompleteObservers()
         {
-            foreach (var observer in observers) 
+            foreach (var observer in observers)
             {
-                observer.OnCompleted();    
+                observer.OnCompleted();
             }
         }
     }

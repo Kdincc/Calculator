@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Task5.Calculator.UnitTests
+﻿namespace Task5.Calculator.UnitTests
 {
     [TestClass]
     public class CalculatorProcessorTests
