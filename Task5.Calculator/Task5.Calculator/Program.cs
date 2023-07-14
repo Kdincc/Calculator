@@ -13,8 +13,7 @@ namespace Task5.Calculator
             var services = new ServiceCollection().RegisterServices().BuildServiceProvider();
             IUserInterface userInterface = services.GetRequiredService<IUserInterface>();
             IInputChecker inputChecker = services.GetRequiredService<IInputChecker>();
-            ICalculatingResultsWriter resultsWriter = services.GetService<ICalculatingResultsWriter>();
-            ICalculator calculator = services.GetService<ICalculator>();
+            CalculatorAdapter calculator= services.GetRequiredService<CalculatorAdapter>();
 
             string outputPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "output.txt");
 
@@ -23,17 +22,14 @@ namespace Task5.Calculator
 
             string input = userInterface.Input();
 
-            calculator.Subscribe(resultsWriter);
 
             if (inputChecker.IsFilePathExists(input))
             {
                 calculator.CalculateFromFile(input);
-                resultsWriter.WriteResultsToFile(outputPath);
             }
             else
             {
                 calculator.CalculateFromConsole(input);
-                resultsWriter.WriteResultsToConsole();
             }
 
             Console.ReadLine();
