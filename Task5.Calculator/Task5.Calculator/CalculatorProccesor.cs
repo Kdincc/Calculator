@@ -47,7 +47,11 @@ namespace Task5.Calculator
                 }
                 else
                 {
-                    isPreviousSymbolOperator = true;
+                    if (ch != (char)Operators.RightBracket)
+                    {
+                        isPreviousSymbolOperator = true;
+
+                    }
                     TryAddNumber(number);
 
                     if (IsOperator(ch))
