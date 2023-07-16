@@ -29,29 +29,21 @@ namespace Task5.Calculator
                 return result;
             }
 
-            NotifyObservers(expression + " = " + "Incorrect expression!");
+            NotifyObservers($"{expression} =  Incorrect expression!");
 
             return result;
         }
 
-        public void CalculateFromFile(string path)
+        public void CalculateFromFile(string expression)
         {
-            using (var streamReader = new StreamReader(path))
+            if (_checker.IsCorrectFileExpression(expression))
             {
-                while (!streamReader.EndOfStream)
-                {
-                    var expression = streamReader.ReadLine();
-
-                    if (_checker.IsCorrectFileExpression(expression))
-                    {
-                        var result = _calculateProcessor.ProcessMathExpression(expression);
-                        NotifyObservers($"{expression} = {result}");
-                    }
-                    else
-                    {
-                        NotifyObservers($"{expression} = Incorrect expression!");
-                    }
-                }
+                var result = _calculateProcessor.ProcessMathExpression(expression);
+                NotifyObservers($"{expression} = {result}");
+            }
+            else
+            {
+                NotifyObservers($"{expression} = Incorrect expression!");
             }
 
             NotifyAboutCompleteObservers();
