@@ -45,8 +45,6 @@ namespace Task5.Calculator
             {
                 NotifyObservers($"{expression} = Incorrect expression!");
             }
-
-            NotifyAboutCompleteObservers();
         }
 
         public IDisposable Subscribe(IObserver<string> observer)

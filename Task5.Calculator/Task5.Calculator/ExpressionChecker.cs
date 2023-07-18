@@ -8,8 +8,8 @@ namespace Task5.Calculator
     {
         public bool IsCorrectConsoleExpression(string expression)
         {
-            const string PATTERN = @"^-?\d+(\.\d+)?([/+*-]-?\d+(\.\d+)?)*$";
-            Regex regex = new Regex(PATTERN);
+            const string pattern = @"^-?\d+(\.\d+)?([/+*-]-?\d+(\.\d+)?)*$";
+            Regex regex = new Regex(pattern);
 
             if (regex.IsMatch(expression))
             {
@@ -21,8 +21,8 @@ namespace Task5.Calculator
 
         public bool IsCorrectFileExpression(string expression)
         {
-            const string PATTERN = @"^-?(\d+(\.\d+)?|\(+-?\d+(\.\d+)?)([-+*/](\(+)?\d+(\.\d+)?\)*([-+*/]\(+-?\d+(\.\d+)?)*)*$";
-            Regex regex = new Regex(PATTERN);
+            string pattern = @"^-?(\d+(\.\d+)?|\(+-?\d+(\.\d+)?)([-+*/](\(+)?\d+(\.\d+)?\)*([-+*/]\(+-?\d+(\.\d+)?)*)*$";
+            Regex regex = new Regex(pattern);
             int leftBracketCount = expression.Where(x => x == (char)Operators.LeftBracket).Count();
             int rightBracketCount = expression.Where(x => x == (char)Operators.RightBracket).Count();
 

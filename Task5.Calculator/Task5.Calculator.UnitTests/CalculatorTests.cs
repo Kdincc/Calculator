@@ -37,7 +37,11 @@
             //act
             calculator.Subscribe(resultsWriter);
             File.WriteAllLines(path, expressions);
-            calculator.CalculateFromFile(path);
+
+            foreach (string expression in expressions)
+            {
+                calculator.CalculateFromFile(expression);
+            }
             resultsWriter.WriteResultsToFile(outputPath);
             actual = File.ReadAllLines(outputPath);
 

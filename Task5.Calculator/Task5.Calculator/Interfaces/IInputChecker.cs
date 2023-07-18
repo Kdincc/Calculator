@@ -3,5 +3,7 @@
     public interface IInputChecker
     {
         bool IsFilePathExists(string path);
+
+        bool IsMathExpression(string expression);
     }
 }
