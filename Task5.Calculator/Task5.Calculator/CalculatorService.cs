@@ -40,6 +40,7 @@ namespace Task5.Calculator
                 if (mode.Key.Invoke(input))
                 {
                     mode.Value.Invoke(input);
+                    Console.WriteLine("Calculating is over!");
                     return;
                 }
             }
