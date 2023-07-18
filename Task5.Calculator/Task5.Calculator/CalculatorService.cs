@@ -40,9 +40,11 @@ namespace Task5.Calculator
                 if (mode.Key.Invoke(input))
                 {
                     mode.Value.Invoke(input);
+                    return;
                 }
             }
-            
+
+            Console.WriteLine("Invalid input!");
         }
 
         private void CalculateAndWriteToConsole(string input) 
